@@ -5,17 +5,7 @@ package com.string;
 
 import java.lang.reflect.Constructor;
 
-//Singleton class
-class Singleton
-{
-	// public instance initialized when loading the class
-	public static Singleton instance = new Singleton();
-	
-	private Singleton()
-	{
-		// private constructor
-	}
-}
+//Reflection: Reflection can be caused to destroy singleton property of singleton class, as shown in following example:
 
 public class ReflectionGFG
 {
@@ -47,3 +37,23 @@ public class ReflectionGFG
 									+ instance2.hashCode());
 	}
 }
+
+/*
+ * After running this class, you will see that hashCodes are different that
+ * means, 2 objects of same class are created and singleton pattern has been
+ * destroyed.
+ * 
+ * Overcome reflection issue: To overcome issue raised by reflection, enums are 
+ * used because java ensures internally that enum value is instantiated only once. 
+ * Since java Enums are globally accessible, they can be used for singletons. 
+ * Its only drawback is that it is not flexible i.e it does not allow lazy initialization.
+ * Java program for Enum type singleton
+ *
+ * public enum Singleton { INSTANCE; }
+ *
+ * As enums don’t have any constructor so it is not possible for Reflection to
+ * utilize it. Enums have their by-default constructor, we can’t invoke them by
+ * ourself. JVM handles the creation and invocation of enum constructors
+ * internally. As enums don’t give their constructor definition to the program,
+ * it is not possible for us to access them by Reflection also.
+ *, reflection can’t break singleton property in case of enums.*/
